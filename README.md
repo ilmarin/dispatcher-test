@@ -1,4 +1,4 @@
-Dispather emulation
+Dispatcher emulation
 ===================
 
 Emulation of mass mailing according to some criteria.
