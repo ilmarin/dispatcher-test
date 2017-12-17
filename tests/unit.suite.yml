@@ -13,7 +13,6 @@ modules:
             password: ''
             dump: 'tests/_data/dump.sql'
             populate: true
-            #populator: 'mysql -u $user -h $host $dbname < $dump'
         - AMQP:
             host: 'rabbit-dispatch'
             port: '5672'
@@ -21,4 +20,3 @@ modules:
             password: 'rabbitmq'
             vhost: '/'
             queues: [task_queue]
-#            single_channel: false
