@@ -1,0 +1,14 @@
+
+{
+    "name": "ilmarin87/dispatch",
+    "description": "Test dispatch project",
+    "type": "project",
+    "require": {
+        "php": ">=7.0",
+        "php-amqplib/php-amqplib": ">=2.6.1"
+    },
+    "require-dev": {
+        "codeception/codeception": "*",
+        "codeception/c3": "*"
+    }
+}

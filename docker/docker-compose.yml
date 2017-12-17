@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+
+  dispatch_db:
+     container_name: mysqldb-dispatch
+     networks:
+       - locbridge
+     image: mysql:5.7
+     volumes:
+       - ./data/mysql/:/docker-entrypoint-initdb.d
+     restart: always
+     environment:
+       MYSQL_DATABASE: 'dispatch'
+       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+     ports:
+       - '3309:3306'
+
+  dispatch_rabbit:
+    container_name: rabbit-dispatch
+    networks:
+       - locbridge
+    image: "rabbitmq:3-management"
+    hostname: "rabbit1"
+    environment:
+        RABBITMQ_DEFAULT_USER: "rabbitmq"
+        RABBITMQ_DEFAULT_PASS: "rabbitmq"
+        RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+        - "15672:15672"
+        - "5672:5672"
+
+  dispatch:
+    container_name: dispatch
+    networks:
+      - locbridge
+    build: ./dispatch
+    volumes:
+      - ../:/usr/src
+    depends_on:
+      - dispatch_db
+      - dispatch_rabbit
+    environment:
+      - LC_ALL=C
+
+networks:
+  locbridge:
+    driver: bridge
